@@ -102,7 +102,23 @@ Communication is unidirectional (ESP32-A → ESP32-B) and occurs over the local 
 
 
 `/busy` → `/stop` → `/play` → `/idle`
+## 🛠️ Software & Technologies
 
+- ESP32 Arduino Framework
+
+- I²S (Inter-IC Sound) Protocol
+
+- Wi-Fi (HTTP & WebSocket)
+
+- ByteDance / Volcengine ASR
+
+- ChatAnywhere (OpenAI-compatible GPT API)
+
+- Google Translate TTS
+
+- Adafruit_GFX & SSD1306 Libraries
+
+- Finite State Machine Design
 
 # 🚀 Quick Start 
 ## 🛠 Environment Setup
@@ -252,3 +268,24 @@ Upload ESP32-A
     - Busy animation during listening & processing
 
 7. Speaker outputs AI response
+## 🚀 How It Works (Flow)
+
+1. User touches the touch sensor
+
+2. ESP32-A starts recording audio
+
+3. Speech is converted to text (ASR)
+
+4. Text is sent to the chatbot (GPT)
+
+5. Chatbot response is sent to ESP32-B
+
+6. ESP32-B plays speech + updates OLED
+    - OLED shows:
+        - Idle animation [eyes blinking]
+
+        - Busy animation during listening & processing [audio signal]
+
+7. User can interrupt at any time
+
+

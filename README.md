@@ -62,6 +62,111 @@ To overcome the resource limitations of a single microcontroller, the system is 
 - Input: TTP223 capacitive touch sensor
 
 - Audio Output:  4Ω 3W Speaker
+## .🔄Communication
+### ESP32-A → ESP32-B via HTTP (Wi-Fi)
+The system uses Wi-Fi–based HTTP communication to coordinate actions between two ESP32 devices.
+ESP32-A acts as the controller and AI processing unit, while ESP32-B acts as the audio output and UI unit.
+ESP32-B runs an embedded HTTP server, and ESP32-A sends REST requests to control its behavior.
+Communication is unidirectional (ESP32-A → ESP32-B) and occurs over the local network with low latency.
+- Communication Protocol
+
+    - Medium: Wi-Fi (LAN)
+
+    - Protocol: HTTP (REST)
+
+    - Method: POST
+
+    - Server: ESP32-B (port 8000)
+
+    - Client: ESP32-A
+#### Endpoints Used
+
+1. **`/busy`**
+   Called when the user starts speaking.
+   ESP32-B switches to the **Listening & Processing animation** on the OLED.
+
+2. **`/stop`**
+   Called immediately after `/busy`.
+   Any ongoing audio playback is **stopped** so the new voice input is not interrupted.
+
+3. **(ASR + Chatbot processing happens on ESP32-A)**
+   Speech is recorded, converted to text, and sent to the chatbot.
+
+4. **`/play`**
+   Called after the chatbot reply is received.
+   ESP32-B converts the text to speech and **plays the audio** through the speaker.
+
+5. **`/idle`**
+   Called after playback finishes or when the system is ready again.
+   ESP32-B returns to the **idle eye animation**, waiting for the next interaction.
+
+
+`/busy` → `/stop` → `/play` → `/idle`
+
+
+# 🚀 Quick Start (Your Project)
+## 🛠 Environment Setup
+1. Install Arduino IDE
+
+Arduino IDE 2.0 or later recommended
+
+2. Install ESP32 Board Support
+
+Open Arduino IDE → File → Preferences
+
+Add this URL to Additional Board Manager URLs:
+
+https://espressif.github.io/arduino-esp32/package_esp32_index.json
+
+
+Go to Tools → Board → Boards Manager
+
+Search “ESP32” and install
+esp32 by Espressif Systems
+## 📦 Required Libraries
+
+### Install via Library Manager (Tools → Manage Libraries):
+
+- Adafruit_GFX
+
+- Adafruit_SSD1306
+
+- ArduinoJson
+
+- WebServer (ESP32 core)
+### Install via ZIP.file
+- Download the [ZIP FILE](https://drive.google.com/drive/folders/1cxwlnMrinvA2jZlQyiTGMtgiXTPgrZg3?usp=sharing)
+- Open Arduino IDE
+- Go to Sketch → Include Library → Add .ZIP Library..
+- Select the DAZI-AI.zip and ESP32-audioI2S-master.zip.
+- Wait for installation to complete
+## 🔑 API & Network Configuration
+### Wi-Fi
+In both ESP32-A and ESP32-B sketches, set:
+```bash
+
+  const char* ssid = "your-wifi-name";
+  const char* password = "your-wifi-password";
+```
+### ASR (ESP32-A)
+Provider: ByteDance / Volcengine
+Replace:
+
+```bash
+const char* asr_api_key = "your-bytedance-asr-api-key";
+
+```
+### Chatbot (ESP32-A)
+Provider: ChatAnywhere (OpenAI-compatible)
+Replace:
+```bash
+String apiKey = "your-chatanywhere-api-key";
+```
+Customize system prompt to define chatbot personality:
+```bash
+String personality =
+  "You are a playful, warm, and respectful AI companion with light humor.";
+```
 ## 🔌 Circuit connections
 - ###  ESP32-A (ASR + Chatbot Controller)
 #### 🎤 INMP441 I²S Microphone
@@ -97,5 +202,54 @@ To overcome the resource limitations of a single microcontroller, the system is 
 | GND  | GND         |
 | SDA  | GPIO **21** |
 | SCL  | GPIO **22** |
+## 🔄 Overall System Architecture
 
+### ESP32-A
 
+- Touch-to-talk input
+
+- Speech-to-text (ASR)
+
+- Chatbot processing
+
+- Sends control + text to ESP32-B
+
+### ESP32-B
+
+- OLED animations (Idle / Busy)
+
+- Text-to-speech (Google TTS)
+
+- Audio playback
+
+- Interruptible audio handling
+## ▶️ Upload Order
+
+Upload ESP32-B first
+Note its IP address from Serial Monitor
+
+Update this in ESP32-A:
+```bash
+const char* ttsHostIP = "ESP32-B-IP";// like 192.168.1.1
+
+```
+Upload ESP32-A
+🧪 Testing
+
+Open Serial Monitor (115200 baud)
+
+Wait for Wi-Fi connection
+
+Touch the TTP223 sensor
+
+Speak your prompt
+
+Release → ASR → Chatbot → TTS
+
+OLED shows:
+
+Idle animation
+
+Busy animation during listening & processing
+
+Speaker outputs AI response

@@ -12,10 +12,10 @@
 
 
 // === WiFi / ChatAnywhere ===
-const char* ssid     = "Netline broadband";
-const char* password = "netline@863";
+const char* ssid     = "SSID";
+const char* password = "PASSWORD";
 const char* chatServer = "https://api.chatanywhere.org/v1/chat/completions";
-String apiKey = "sk-Cx3CGtNDjTLuwuZcQBsMcypGzR609zocNfZbNFdqsrJ0ndwB";
+String apiKey = "API_KEY";
 
 // System prompt
 String personality =
@@ -29,7 +29,7 @@ String personality =
 ;
 
 // Forwarding: set IP of ESP32 B (TTS server)
-const char* ttsHostIP = "192.168.1.5"; // CHANGE to ESP32 B IP
+const char* ttsHostIP = "192.168.1.xx"; // CHANGE to ESP32 B IP
 uint16_t ttsPort = 8000;
 
 // I2S mic pins (INMP441)
@@ -47,7 +47,7 @@ uint16_t ttsPort = 8000;
 #define SILENCE_MS 1000
 
 // ASR creds
-const char* asr_api_key = "07fcb4a5-b7b2-45d8-864a-8cc0292380df";
+const char* asr_api_key = "asr_Api_key";
 const char* asr_cluster = "volcengine_input_en";
 ArduinoASRChat asrChat(asr_api_key, asr_cluster);
 

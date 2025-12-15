@@ -1,10 +1,3 @@
-/* ESP32 B
-   - Idle: Eye animation
-   - Busy: Bitmap animation (Listening & Processing)
-   - Audio start: switch to Idle
-   - FIXED: Stable TTS playback for unlimited attempts
-*/
-
 #include <WiFi.h>
 #include <WebServer.h>
 #include "Audio.h"

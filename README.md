@@ -7,7 +7,7 @@ To overcome the resource limitations of a single microcontroller, the system is 
 - ESP32-A handles voice recording, speech recognition, and chatbot communication.
 
 - ESP32-B manages text-to-speech audio playback and OLED display animations.
-# Key Features
+## Key Features
 - Dual-ESP32 Architecture
     - Separate controllers for ASR/chat processing and TTS/OLED ensure stability and real-time performance.
 - Complete Voice Interaction:
@@ -104,7 +104,7 @@ Communication is unidirectional (ESP32-A → ESP32-B) and occurs over the local 
 `/busy` → `/stop` → `/play` → `/idle`
 
 
-# 🚀 Quick Start (Your Project)
+# 🚀 Quick Start 
 ## 🛠 Environment Setup
 1. Install Arduino IDE
 

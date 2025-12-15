@@ -13,8 +13,8 @@
 #include <Adafruit_SSD1306.h>
 
 // ================= WIFI =================
-const char* ssid = "Netline broadband";
-const char* password = "netline@863";
+const char* ssid = "SSID";
+const char* password = "PASSWORD";
 
 // ================= AUDIO =================
 #define I2S_DOUT 26

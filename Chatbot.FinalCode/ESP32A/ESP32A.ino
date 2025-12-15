@@ -1,9 +1,3 @@
-/* ESP32 A: ASR -> ChatAnywhere -> forward reply to ESP32 B (TTS)
-   Press touch (or button) to START recording (VAD stops it).
-   When starting recording this sketch sends POST /stop to the TTS ESP
-   so any playing audio is interrupted immediately.
-*/
-
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>

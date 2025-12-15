@@ -224,7 +224,6 @@ String personality =
 
 - Interruptible audio handling
 ## ▶️ Upload Order
-
 Upload ESP32-B first
 Note its IP address from Serial Monitor
 
@@ -234,22 +233,22 @@ const char* ttsHostIP = "ESP32-B-IP";// like 192.168.1.1
 
 ```
 Upload ESP32-A
-🧪 Testing
+## 🧪 Testing
 
-Open Serial Monitor (115200 baud)
+1. Open Serial Monitor (115200 baud)
 
-Wait for Wi-Fi connection
+2. Wait for Wi-Fi connection
 
-Touch the TTP223 sensor
+3. Touch the TTP223 sensor
 
-Speak your prompt
+4. Speak your prompt
 
-Release → ASR → Chatbot → TTS
+5. Release → ASR → Chatbot → TTS
 
-OLED shows:
+6. OLED shows:
 
-Idle animation
+    - Idle animation
 
-Busy animation during listening & processing
+    - Busy animation during listening & processing
 
-Speaker outputs AI response
+7. Speaker outputs AI response

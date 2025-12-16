@@ -9,7 +9,7 @@ To overcome the resource limitations of a single microcontroller, the system is 
 - ESP32-B manages text-to-speech audio playback and OLED display animations.
 ## Key Features
 - Dual-ESP32 Architecture
-    - Separate controllers for ASR/chat processing and TTS/OLED ensure stability and real-time performance.
+    - Separate controllers for ASR/chat processing and TTS/OLED ensure better handling.
 - Complete Voice Interaction:
   - Voice input via INMP441 microphone
   - Real-time speech recognition using ByteDance ASR API
